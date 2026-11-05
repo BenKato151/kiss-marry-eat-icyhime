@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Smash or Pass - Icyhime Edition</title>
+    <title>Kiss-Marry-Eat - Icyhime Edition</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -17,7 +17,7 @@
                 <img 
                   id="character-image" 
                   src="" 
-                  alt="Personaje" 
+                  alt="figure"
                   draggable="false"
                   onerror="this.src='https://freesvg.org/storage/img/thumb/errname1.png'; this.onerror=null;">
                 <h2 id="character-name">Lade...</h2>
@@ -26,13 +26,14 @@
 
         </div>
 
-        <!-- Buttons for Smash or Pass -->
+        <!-- Buttons for Kiss Marry Eat -->
         <div class="buttons">
+            <!-- TODO: Replace buttons for Kiss, Marry, Eat, back -->
             <button id="back-btn" onclick="goBack()">Zurück</button>
             <button id="pass-btn">Pass 👎</button>
             <button id="smash-btn">Smash 👍</button>
         </div>
-        <!-- Buttons for Smash or Pass -->
+        <!-- Buttons for Kiss Marry Eat -->
 
         <!-- History and result display -->
         <p id="result">
@@ -46,12 +47,14 @@
         <!-- Download button -->
         <div id="overview-grid"></div>
     </div>
+
+    <script src="characters.js"></script>
     <script src="script.js"></script>
 
     <div class="footer">
         <a href="https://github.com/Framerr/smash-or-pass-template">Template</a> created by <a href="https://github.com/Framerr" target="_blank">Framerr</a>
         <br>
-        <a href="https://github.com/BenKato151/smash-or-pass-icyhime">Template</a> rewritten by <a href="https://github.com/BenKato151/">BenKato_</a> and <a href="https://twitch.tv/icyhime">Icyhime</a>
+        <a href="https://github.com/BenKato151/kiss-marry-eat-icyhime">Template</a> rewritten by <a href="https://github.com/BenKato151/">BenKato_</a> and <a href="https://twitch.tv/icyhime">Icyhime</a>
     </div>
 </body>
 </html>
