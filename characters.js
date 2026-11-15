@@ -95,6 +95,10 @@ const characters = [
   { name: "Waschmaschinenmann", images: ["kiss_marry_eat/WaschiOkay/Waschmaschinenmann-1.jpg"] },
   { name: "Yusaki 🦄🪽  YuMii   #ALightForPaws •´¨ •.¸¸.εïз", images: ["kiss_marry_eat/YusakiKirin/Yusaki 🦄🪽_ YuMii _ #ALightForPaws •´¨_•.¸¸.εïз-1.jpg"] },
   { name: "Blizzchaq🦎🗺️", images: ["kiss_marry_eat/blizzchaq/Blizzchaq🦎🗺️-1.jpg"] },
+  { name: "DonCamillo232   GerVtuber (hopefully soon)🇩🇪", images: [
+    "kiss_marry_eat/doncamillo232/DonCamillo232 _ GerVtuber (hopefully soon)🇩🇪-1.jpg",
+    "kiss_marry_eat/doncamillo232/DonCamillo232 _ GerVtuber (hopefully soon)🇩🇪-2.jpg"
+  ]},
   { name: "𓄼Azuriel↝", images: ["kiss_marry_eat/einAzuriel/𓄼Azuriel↝-1.jpg"] },
   { name: "Ravora 🍓🍃", images: [
     "kiss_marry_eat/itsRavora/Ravora 🍓🍃-1.jpg",
