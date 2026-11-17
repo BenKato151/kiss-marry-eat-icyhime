@@ -14,6 +14,7 @@ const characters = [
     "kiss_marry_eat/Frau_Ente_VT/Frau_Ente-2.jpg"
   ]},
   { name: "Gomnir vt   collabs closed", images: ["kiss_marry_eat/Gomnir_vt/Gomnir_vt _ collabs closed-1.jpg"] },
+  { name: "Hana kitsumi GERVtuberin", images: ["kiss_marry_eat/Hana15051/Hana_kitsumi_GERVtuberin-1.jpg"] },
   { name: "Hanae ⏻ 🌐14.11 BIRTHDAY STREAM", images: [
     "kiss_marry_eat/HanaeVT/Hanae ⏻ 🌐14.11 BIRTHDAY STREAM-1.jpg",
     "kiss_marry_eat/HanaeVT/Hanae ⏻ 🌐14.11 BIRTHDAY STREAM-2.jpg",
@@ -65,6 +66,7 @@ const characters = [
     "kiss_marry_eat/NagiNovaNya/🍰 NagiNova ☕ _ Latex Maid VTuber _ Club Maid Zone-1.jpg",
     "kiss_marry_eat/NagiNovaNya/🍰 NagiNova ☕ _ Latex Maid VTuber _ Club Maid Zone-2.jpg"
   ]},
+  { name: "Nellphy ✨", images: ["kiss_marry_eat/NellphyVanNoah/Nellphy ✨-1.jpg"] },
   { name: "NessaNoCho🖤💙", images: [
     "kiss_marry_eat/NessaNoCho/NessaNoCho🖤💙-1.jpg",
     "kiss_marry_eat/NessaNoCho/NessaNoCho🖤💙-2.jpg"
