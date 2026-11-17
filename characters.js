@@ -1,4 +1,3 @@
-// Lista de personajes / Character List
 const characters = [
 
   { name: "Aki", images: ["kiss_marry_eat/Ak3n4ri/Aki-1.jpg"] },
@@ -8,6 +7,7 @@ const characters = [
   ]},
   { name: "Ciella the cutie potati   Dokomi 2027", images: ["kiss_marry_eat/CiellaVT/Ciella the cutie potati _ Dokomi 2027-1.jpg"] },
   { name: "DaisyMelfea ✨ Elf Vtuber 🍃", images: ["kiss_marry_eat/DaisyMelfea/DaisyMelfea ✨ Elf Vtuber 🍃-1.jpg"] },
+  { name: "DerJer", images: ["kiss_marry_eat/DerJer666/DerJer-1.jpg"] },
   { name: "Einerwie", images: ["kiss_marry_eat/Einerwie_LP/Einerwie-1.jpg"] },
   { name: "Frau Ente", images: [
     "kiss_marry_eat/Frau_Ente_VT/Frau_Ente-1.jpg",
@@ -51,6 +51,7 @@ const characters = [
     "kiss_marry_eat/Klinday_/Klinday ~ 🐺🪓-Vtuber-2.jpg",
     "kiss_marry_eat/Klinday_/Klinday ~ 🐺🪓-Vtuber-3.png"
   ]},
+  { name: "Lou Luxaris 🌿✨ AION2 Content Creator", images: ["kiss_marry_eat/LouLuxaris/Lou Luxaris 🌿✨ AION2 Content Creator-1.jpg"] },
   { name: "Marry 🌹 GERVtuberin I Redebut 04.11.", images: [
     "kiss_marry_eat/MarryofBlood/Marry 🌹 GERVtuberin I Redebut 04.11.-1.jpg",
     "kiss_marry_eat/MarryofBlood/Marry 🌹 GERVtuberin I Redebut 04.11.-2.jpg"
@@ -74,6 +75,10 @@ const characters = [
     "kiss_marry_eat/NezuAwoo/NezuAwoo _ VTuber _ Gym-3.jpg",
     "kiss_marry_eat/NezuAwoo/NezuAwoo _ VTuber _ Gym-4.jpg"
   ]},
+  { name: "Noctus Novaglace  SoulSync   Comiccon Stuttgart 26", images: [
+    "kiss_marry_eat/NoctusVT/Noctus_Novaglace_ SoulSync _ Comiccon Stuttgart 26-1.jpg",
+    "kiss_marry_eat/NoctusVT/Noctus_Novaglace_ SoulSync _ Comiccon Stuttgart 26-2.jpg"
+  ]},
   { name: "Obergeneral Stinky   VTuber & Cutter", images: ["kiss_marry_eat/OberGen_Stinky/Obergeneral Stinky _ VTuber & Cutter-1.jpg"] },
   { name: "Raito 🔥🪽 Polaris 2026 🫰🏻", images: [
     "kiss_marry_eat/RaitoNoAniki/Raito 🔥🪽 Polaris 2026 🫰🏻-1.jpg",
@@ -84,6 +89,7 @@ const characters = [
     "kiss_marry_eat/RenaCloverfield/Rena 🍀🐛_ ARTIST _ Everybody's Darling-2.jpg"
   ]},
   { name: "ShadowLorn 🐲🎲📽GerPNGTuber", images: ["kiss_marry_eat/ShadowLorn1/ShadowLorn 🐲🎲📽GerPNGTuber-1.jpg"] },
+  { name: "Shoyo 🔥🖤", images: ["kiss_marry_eat/Shoyocchii/Shoyo 🔥🖤-1.jpg"] },
   { name: "sifi the cuddle bunny", images: [
     "kiss_marry_eat/Sifhlord/sifi_the_cuddle_bunny-1.jpg",
     "kiss_marry_eat/Sifhlord/sifi_the_cuddle_bunny-2.jpg"
@@ -96,6 +102,10 @@ const characters = [
   { name: "TimoTamun   GERVtuber ⚡🦅", images: [
     "kiss_marry_eat/TimotamunVT/TimoTamun _ GERVtuber ⚡🦅-1.jpg",
     "kiss_marry_eat/TimotamunVT/TimoTamun _ GERVtuber ⚡🦅-2.jpg"
+  ]},
+  { name: "ToastieVT 🍞   GerVtuber", images: [
+    "kiss_marry_eat/ToastieVT/ToastieVT 🍞 _ GerVtuber-1.png",
+    "kiss_marry_eat/ToastieVT/ToastieVT 🍞 _ GerVtuber-2.png"
   ]},
   { name: "Viktorija❄️🦊   🏳️‍⚧️ (Un-)Heilige Allianz", images: [
     "kiss_marry_eat/VictorijaVT/Viktorija❄️🦊 _ 🏳️‍⚧️ (Un-)Heilige Allianz-1.jpg",
@@ -120,6 +130,8 @@ const characters = [
     "kiss_marry_eat/kayaba_sama/Kayaba_sama _ GERVtuber _ Debut soon-2.jpg"
   ]},
   { name: "Kerberusz (rocamiel), not an artist", images: ["kiss_marry_eat/kerberusz/Kerberusz (rocamiel), not an artist-1.jpg"] },
+  { name: "MayKokoro 🍓", images: ["kiss_marry_eat/may_kokoro/MayKokoro 🍓-1.jpg"] },
+  { name: "Misamii🐺🔥💜", images: ["kiss_marry_eat/misamiix3/Misamii🐺🔥💜-1.jpg"] },
   { name: "MONIIKA    💸🐖 VTUBER", images: [
     "kiss_marry_eat/moniika_vt/MONIIKA __ 💸🐖 VTUBER-1.jpg",
     "kiss_marry_eat/moniika_vt/MONIIKA __ 💸🐖 VTUBER-2.jpg"
@@ -129,5 +141,10 @@ const characters = [
     "kiss_marry_eat/reap_sir/Sir Reap-2.jpg"
   ]},
   { name: "Riyucca   🦦🐉 Drotter GERVtuber", images: ["kiss_marry_eat/riyucca_ttv/Riyucca _ 🦦🐉 Drotter GERVtuber-1.jpg"] },
-  { name: "Roter Drache", images: ["kiss_marry_eat/roterdrache611/Roter Drache-1.jpg"] }
-]
+  { name: "Roter Drache", images: ["kiss_marry_eat/roterdrache611/Roter Drache-1.jpg"] },
+  { name: "vTakeru 📃", images: ["kiss_marry_eat/vTakeruVT/vTakeru 📃-1.png"] },
+  { name: "Vaen 🥀🦋  Comms Open!", images: [
+    "kiss_marry_eat/vaenlytas/Vaen 🥀🦋_ Comms Open!-1.jpg",
+    "kiss_marry_eat/vaenlytas/Vaen 🥀🦋_ Comms Open!-2.jpg"
+  ]}
+];
