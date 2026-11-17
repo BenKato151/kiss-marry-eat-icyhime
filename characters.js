@@ -16,7 +16,9 @@ const characters = [
   { name: "Gomnir vt   collabs closed", images: ["kiss_marry_eat/Gomnir_vt/Gomnir_vt _ collabs closed-1.jpg"] },
   { name: "Hanae ⏻ 🌐14.11 BIRTHDAY STREAM", images: [
     "kiss_marry_eat/HanaeVT/Hanae ⏻ 🌐14.11 BIRTHDAY STREAM-1.jpg",
-    "kiss_marry_eat/HanaeVT/Hanae ⏻ 🌐14.11 BIRTHDAY STREAM-2.jpg"
+    "kiss_marry_eat/HanaeVT/Hanae ⏻ 🌐14.11 BIRTHDAY STREAM-2.jpg",
+    "kiss_marry_eat/HanaeVT/Hanae ⏻ 🌐16.11 BIRTHDAY STREAM-1.jpg",
+    "kiss_marry_eat/HanaeVT/Hanae ⏻ 🌐16.11 BIRTHDAY STREAM-2.jpg"
   ]},
   { name: "Himechii   Subathon 29.11. 🦋", images: [
     "kiss_marry_eat/HimechiiVT/Himechii _ Subathon 29.11. 🦋-1.jpg",
@@ -53,6 +55,11 @@ const characters = [
     "kiss_marry_eat/MarryofBlood/Marry 🌹 GERVtuberin I Redebut 04.11.-1.jpg",
     "kiss_marry_eat/MarryofBlood/Marry 🌹 GERVtuberin I Redebut 04.11.-2.jpg"
   ]},
+  { name: "Mooswolf 🌿🐺 GerVTuber", images: [
+    "kiss_marry_eat/Mooswolf/Mooswolf 🌿🐺 GerVTuber-1.jpg",
+    "kiss_marry_eat/Mooswolf/Mooswolf 🌿🐺 GerVTuber-2.jpg"
+  ]},
+  { name: "Schmasi", images: ["kiss_marry_eat/MrSchmasi/Schmasi-1.jpg"] },
   { name: "🍰 NagiNova ☕   Latex Maid VTuber   Club Maid Zone", images: [
     "kiss_marry_eat/NagiNovaNya/🍰 NagiNova ☕ _ Latex Maid VTuber _ Club Maid Zone-1.jpg",
     "kiss_marry_eat/NagiNovaNya/🍰 NagiNova ☕ _ Latex Maid VTuber _ Club Maid Zone-2.jpg"
@@ -77,6 +84,10 @@ const characters = [
     "kiss_marry_eat/RenaCloverfield/Rena 🍀🐛_ ARTIST _ Everybody's Darling-2.jpg"
   ]},
   { name: "ShadowLorn 🐲🎲📽GerPNGTuber", images: ["kiss_marry_eat/ShadowLorn1/ShadowLorn 🐲🎲📽GerPNGTuber-1.jpg"] },
+  { name: "sifi the cuddle bunny", images: [
+    "kiss_marry_eat/Sifhlord/sifi_the_cuddle_bunny-1.jpg",
+    "kiss_marry_eat/Sifhlord/sifi_the_cuddle_bunny-2.jpg"
+  ]},
   { name: "Raya 🐲📖  wurmdrago", images: [
     "kiss_marry_eat/SorayaLinx/Raya 🐲📖_ wurmdrago _-1.jpg",
     "kiss_marry_eat/SorayaLinx/Raya 🐲📖_ wurmdrago _-2.jpg"
