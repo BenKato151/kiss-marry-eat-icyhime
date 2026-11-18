@@ -1,5 +1,5 @@
-characters_output.js
+characters_output.txt
 generate_character_list.py
 dl.py
-remove_wrong_entries.sh
+fix_character_entries.sh
 .idea
