@@ -5,194 +5,363 @@ const endMessages = [
   '👇 Hier könnt ihr eure Entscheidungen herunterladen 👇'
 ];
 
-// Variables for the character history to go back and forth between each character and keeping track of them
-let availableCharacters = [...characters];
-let currentCharacter = null;
-let currentImageIndex = 0;
-let characterHistory = [];
-let characterFuture = [];
+// You can customize and translate your own texts here!
+const texts = {
+  removeChoice: 'Auswahl entfernen',
+  next: 'Weiter',
+  finished: 'Fertig',
+  round: 'Runde'
+};
 
-// Variable for the response history
-let responses = [];
-
-// Variables for the drag logic
-let isDragging = false;
-let startPosX = 0;
-let currentTranslateX = 0;
-
-const SWIPE_THRESHOLD = 200;
+// Variables
+const FALLBACK_IMG = 'https://freesvg.org/storage/img/thumb/errname1.png';
+const CATEGORIES = ['Kiss', 'Marry', 'Eat'];
+const cardElements = [];
+let rounds = [];
+let currentRoundIndex = 0;
+let finished = false;
 
 // Elementos del DOM / DOM Elements
-const characterImage = document.getElementById('character-image');
-const characterName = document.getElementById('character-name');
-const resultText = document.getElementById('result');
-const smashBtn = document.getElementById('smash-btn');
-const passBtn = document.getElementById('pass-btn');
-const card = document.querySelector('.card');
-const buttons = document.querySelector('.buttons');
-const dragContainer = document.getElementById('drag-container');
-
-// Creating DOM Elements for the image counter
-const imageCounter = document.createElement('div');
-imageCounter.id = 'image-counter';
-
-// Creating DOM Elements for the UI Elements to switch between multiple images
-const prevImgBtn = document.createElement('button');
-prevImgBtn.id = 'prev-img-btn';
-prevImgBtn.textContent = '‹';
-
-const dotsContainer = document.createElement('div');
-dotsContainer.id = 'dots-container';
-
-const nextImgBtn = document.createElement('button');
-nextImgBtn.id = 'next-img-btn';
-nextImgBtn.textContent = '›';
-
-imageCounter.appendChild(prevImgBtn);
-imageCounter.appendChild(dotsContainer);
-imageCounter.appendChild(nextImgBtn);
-dragContainer.parentNode.insertBefore(imageCounter, dragContainer.nextSibling);
+const cardsContainer = document.getElementById('cards');
+const navButtons = document.getElementById('nav-buttons');
+const backButton = document.getElementById('back-btn');
+const nextButton = document.getElementById('next-btn');
+const downloadButton = document.getElementById('download-btn');
+const resultElement = document.getElementById('result');
+const resultText = document.getElementById('result-text');
+const resultLabel = document.querySelector('.result-label');
+const characterCounter = document.getElementById('character-counter');
+const categoryTray = document.getElementById('category-tray');
 
 
-// If there are multiple images, it will render a dot to indicate how many images you can go through
-function renderDots(total, active) {
-  dotsContainer.innerHTML = '';
-  for (let i = 0; i < total; i++) {
-    const dot = document.createElement('span');
-    dot.className = 'dot' + (i === active ? ' dot-active' : '');
-    dot.addEventListener('click', () => showImage(i));
-    dotsContainer.appendChild(dot);
+// Randomize for each game round as otherwise, all characters will appear in the same order .-.
+// I just copied it from here https://stackoverflow.com/a/12646864 xD
+function shuffle(list) {
+  const tmp = [...list];
+  for (let i = tmp.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [tmp[i], tmp[j]] = [tmp[j], tmp[i]];
   }
+  return tmp;
+}
+
+// Logic to create and keep track of characters each round
+function createRounds() {
+  const shuffledCharacters = shuffle(characters);
+  const newRounds = [];
+
+  for (let i = 0; i < shuffledCharacters.length; i+=3) {
+    const roundCharacters = shuffledCharacters.slice(i, i+3);
+    newRounds.push({
+      characters: roundCharacters,
+      choices: roundCharacters.map(() => null),
+      imageIndexes: [0, 0, 0]
+    });
+  }
+  return newRounds;
+}
+
+// Create the round character cards HTML and add event listeners for the mouse drag and drop and image viewer
+function createCard(cardindex) {
+  const card = document.createElement('div');
+  card.className = 'character-card';
+
+  card.innerHTML = `
+    <div class="image-wrap">
+      <img class="character-image" src="" alt="figure" draggable="false">
+      <button class="clear-button" title="${texts.removeChoice}">x</button>
+      <button class="image-navigation prev">&lt;</button>
+      <button class="image-navigation next">&gt;</button>
+      <div class="choice-label"></div>
+    </div>
+    <div class="dots"></div>
+    <h2 class="character-name"></h2>
+  `;
+
+  card.addEventListener('dragover', event => {
+    event.preventDefault();
+    event.dataTransfer.dropEffect = 'move';
+    card.classList.add('drag-over');
+  });
+
+  card.addEventListener('dragleave', event => {
+    if (!card.contains(event.relatedTarget)) {
+      card.classList.remove('drag-over');
+    }
+  });
+
+  card.addEventListener('drop', event => {
+    event.preventDefault();
+    card.classList.remove('drag-over');
+    const category = event.dataTransfer.getData('text/plain');
+    if (CATEGORIES.includes(category)) {
+      setChoice(cardindex, category);
+    }
+  });
+
+  card.querySelector('.clear-button').addEventListener('click', () =>
+      removeChoice(cardindex)
+  );
+  card.querySelector('.prev').addEventListener('click', () =>
+      showImage(cardindex, getImageIndex(cardindex)-1)
+  );
+  card.querySelector('.next').addEventListener('click', () =>
+      showImage(cardindex, getImageIndex(cardindex)+1)
+  );
+  cardsContainer.appendChild(card);
+  return card;
+}
+
+// Basically my dirty way of creating the cards using the categories length xD
+function createCards() {
+  for (let i = 0; i < CATEGORIES.length; i++) {
+    cardElements.push(createCard(i));
+  }
+}
+
+// Create the HTML for the category buttons
+function createCategoryButtons() {
+  CATEGORIES.forEach(category => {
+    const button = document.createElement('div');
+    button.className = `category-button category-${category.toLowerCase()}`;
+    button.textContent = category;
+    button.dataset.category = category;
+    button.draggable = true;
+
+    button.addEventListener('dragstart', event => {
+      event.dataTransfer.setData('text/plain', category);
+      event.dataTransfer.effectAllowed = 'move';
+    });
+    categoryTray.appendChild(button);
+  });
+}
+
+// Helper Function to get the image index if there are multiple images in the characters entry
+function getImageIndex(cardindex) {
+  return rounds[currentRoundIndex].imageIndexes[cardindex];
 }
 
 // Logic for showing the current image and switching if there are multiple of them
-function showImage(index) {
-  if (!currentCharacter) return;
-  const images = currentCharacter.images;
-  currentImageIndex = Math.max(0, Math.min(index, images.length - 1));
+function showImage(cardindex, index) {
+  const round = rounds[currentRoundIndex];
+  const images = round.characters[cardindex].images;
+  const newIndex = Math.max(0, Math.min(index, images.length - 1));
+  round.imageIndexes[cardindex] = newIndex;
 
-  characterImage.style.opacity = '0';
+  const card = cardElements[cardindex];
+  const image = card.querySelector('.character-image');
+
+  // if there are errors with the image, set it to the fallback image
+  image.style.opacity = 0;
   setTimeout(() => {
-    characterImage.src = images[currentImageIndex] || 'https://freesvg.org/storage/img/thumb/errname1.png';
-    characterImage.style.opacity = '1';
+    image.src = images[newIndex] || FALLBACK_IMG;
+    image.style.opacity = '1';
   }, 120);
 
-  if (images.length > 1) {
-    imageCounter.style.display = 'flex';
-    renderDots(images.length, currentImageIndex);
-    prevImgBtn.classList.toggle('nav-disabled', currentImageIndex === 0);
-    nextImgBtn.classList.toggle('nav-disabled', currentImageIndex === images.length - 1);
-  } else {
-    imageCounter.style.display = 'none';
+  const hasMultipleImages = images.length > 1;
+  const dotsContainer = card.querySelector('.dots');
+  const prevButton = card.querySelector('.prev');
+  const nextImageButton = card.querySelector('.next');
+
+  dotsContainer.innerHTML = '';
+  if (hasMultipleImages) {
+    dotsContainer.style.display = 'flex';
+    prevButton.style.display = 'flex';
+    nextImageButton.style.display = 'flex';
+
+    for (let i = 0; i < images.length; i++) {
+      const dot = document.createElement('span');
+      dot.className = 'dot';
+      if (i === newIndex) {
+       dot.className += ' dot-active';
+      }
+      dot.addEventListener('click', () => showImage(cardindex, i));
+      dotsContainer.appendChild(dot);
+    }
+    prevButton.classList.toggle('navigation-disabled', newIndex === 0);
+    nextImageButton.classList.toggle('navigation-disabled', newIndex === images.length - 1);
+  }
+  else {
+    dotsContainer.style.display = 'none';
+    prevButton.style.display = 'none';
+    nextImageButton.style.display = 'none';
   }
 }
 
-// Show the current index from all characters available
-function updateCounter() {
-  const total = characters.length;
-  const current = total - availableCharacters.length;
-  document.getElementById('character-counter').textContent = `Character ${current} / ${total}`;
+// Logic to set the choice of the selected category
+function setChoice(cardindex, category) {
+  const round = rounds[currentRoundIndex];
+
+  round.choices = round.choices.map(choice => {
+    if (choice === category) {
+      return null;
+    } else {
+      return choice;
+    }
+  });
+
+  round.choices[cardindex] = category;
+  updateChoices();
 }
 
-// Logic to show the next character and keeping track of the characters history
-function loadCharacter() {
-  if (availableCharacters.length === 0) {
-    showEndMessage();
+// Logic to remove the choice
+function removeChoice(cardindex) {
+  rounds[currentRoundIndex].choices[cardindex] = null;
+  updateChoices();
+}
+
+// Logic to update the choice for each character and the navigation buttons
+function updateChoices() {
+  const round = rounds[currentRoundIndex];
+
+  cardElements.forEach((card, cardIndex) => {
+    const choice = round.choices[cardIndex];
+
+    card.classList.remove('pick-kiss', 'pick-marry', 'pick-eat');
+    if (choice) {
+      card.classList.add('pick-' + choice.toLowerCase());
+    }
+
+    const choiceLabel = card.querySelector('.choice-label');
+    const clearButton = card.querySelector('.clear-button');
+    if (choice) {
+      choiceLabel.textContent = choice;
+      choiceLabel.style.display = 'block';
+      clearButton.style.display = 'flex';
+    }
+    else {
+      choiceLabel.style.display = 'none';
+      clearButton.style.display = 'none';
+    }
+  });
+
+  categoryTray.querySelectorAll('.category-button').forEach(button => {
+    const isPlaced = round.choices.includes(button.dataset.category);
+    button.classList.toggle('taken', isPlaced);
+  });
+
+  // Only enable the next-button if all characters got their choice
+  const allChosen = round.choices.every(choice => choice !== null);
+  nextButton.disabled = !allChosen;
+
+  // Display finished or next on the next-button if it's the last round or there are more to go
+  if (currentRoundIndex === rounds.length - 1) {
+    nextButton.textContent = texts.finished;
+  }
+  else {
+    nextButton.textContent = texts.next;
+  }
+}
+
+// Logic to render the image grid
+function renderRound() {
+  const round = rounds[currentRoundIndex];
+
+  // If the round has < 3 characters, then just hide the card and not mess up the grid
+  cardElements.forEach((card, cardindex) => {
+    const hasCharacter = cardindex < round.characters.length;
+    if (hasCharacter) {
+      card.style.visibility = 'visible';
+    }
+    else {
+      card.style.visibility = 'hidden';
+      return;
+    }
+
+    card.querySelector('.character-name').textContent = round.characters[cardindex].name;
+    showImage(cardindex, round.imageIndexes[cardindex]);
+  });
+
+  characterCounter.textContent = `${texts.round} ${currentRoundIndex + 1} / ${rounds.length}`;
+  backButton.disabled = currentRoundIndex === 0;
+
+  updateChoices();
+  updatePreviousChoice();
+  updateDownloadButton();
+}
+
+// Logic for keeping track of the previous round and displaying it
+function updatePreviousChoice() {
+  if (currentRoundIndex === 0) {
+    resultLabel.classList.remove('visible');
+    resultText.textContent = '';
     return;
   }
 
-  if (currentCharacter) {
-    characterHistory.push({character: currentCharacter, imageIndex: currentImageIndex});
-  }
-  characterFuture = [];
-
-  const randomIndex = Math.floor(Math.random() * availableCharacters.length);
-  currentCharacter = availableCharacters[randomIndex];
-  availableCharacters.splice(randomIndex, 1);
-  currentImageIndex = 0;
-
-  characterName.textContent = currentCharacter.name;
-  showImage(0);
-  updateCounter();
-}
-
-// Logic to go back and forth between each character, keeping track of the voting and character history
-function goBack() {
-  if (characterHistory.length === 0) return;
-
-  responses.pop();
-  updateDownloadButton();
-
-  if (currentCharacter) {
-    characterFuture.push({character: currentCharacter, imageIndex: currentImageIndex});
-    availableCharacters.push(currentCharacter);
-  }
-
-  const previous = characterHistory.pop();
-  availableCharacters = availableCharacters.filter(char => char !== previous.character);
-
-  currentCharacter = previous.character;
-  currentImageIndex = previous.imageIndex;
-
-  characterName.textContent = currentCharacter.name;
-  showImage(currentImageIndex);
-  updateCounter();
-}
-
-// Logic for voting
-function handleVote(voteType) {
-  if (!currentCharacter) return;
-
-  responses.push({ character: currentCharacter.name, image: currentCharacter.images[0] ,response: voteType });
-
-  // Muestra el texto "Elección anterior" / Show the text "Previous choice"
-  document.querySelector('.result-label').classList.add('visible');
-
-  const emoji = voteType === 'Smash' ? '😍' : '😒';
-  document.getElementById('result-text').textContent = `${voteType.toUpperCase()}! ${emoji} (${currentCharacter.name})`;
-  document.getElementById('back-btn').style.display = 'inline-block';
-
-  nextCharacter();
-  updateDownloadButton();
-}
-
-// Logic to load the next character
-function nextCharacter() {
-  if (characterFuture.length > 0) {
-    const next = characterFuture.pop();
-    if (currentCharacter) {
-      characterHistory.push({character: currentCharacter, imageIndex: currentImageIndex});
+  const previousRound = rounds[currentRoundIndex - 1];
+  const parts = [];
+  CATEGORIES.forEach(category => {
+    const characterIndex = previousRound.choices.indexOf(category);
+    if (characterIndex !== -1) {
+      parts.push(`${category}: ${previousRound.characters[characterIndex].name}`);
     }
-    availableCharacters = availableCharacters.filter(char => char !== next.character);
-    currentCharacter = next.character;
-    currentImageIndex = next.imageIndex;
-    characterName.textContent = currentCharacter.name;
-    showImage(currentImageIndex);
-    updateCounter();
+  });
+
+  resultLabel.classList.add('visible');
+  resultText.textContent = parts.join(' . ');
+}
+
+// Helper function for the next button and to check whether it's the end of the game
+function goNext() {
+  if (currentRoundIndex === rounds.length - 1) {
+    showEndMessage();
   }
   else {
-    setTimeout(loadCharacter, 0);
+    currentRoundIndex++;
+    renderRound();
   }
+}
+
+// Helper function to go back one round
+function goBack() {
+  if (currentRoundIndex === 0) {
+    return;
+  }
+  currentRoundIndex--;
+  renderRound();
+}
+
+// Logic for keeping track of all the responses for the overview and csv download
+function getResponses() {
+  let finishedRounds;
+  const responses = [];
+
+  if (finished) {
+    finishedRounds = rounds;
+  } else {
+    finishedRounds = rounds.slice(0, currentRoundIndex);
+  }
+
+  finishedRounds.forEach(round => {
+    round.characters.forEach((character, i) => {
+      responses.push({
+        character: character.name,
+        image: character.images[0] || FALLBACK_IMG,
+        response: round.choices[i]
+      });
+    });
+  });
+
+  return responses;
 }
 
 // Función para mostrar el botón de descarga / Function to show the download button
 function updateDownloadButton() {
-  const downloadBtn = document.getElementById('download-btn');
-  downloadBtn.style.display = responses.length > 0 ? 'inline-block' : 'none';
+  downloadButton.style.display = getResponses().length > 0 ? 'inline-block' : 'none';
 }
 
 // Función para descargar el historial como CSV / Function to download the history as CSV
 function downloadCSV() {
   const csvContent = [
     'Character,Response',
-    ...responses.map(r => `"${r.character}",${r.response}`)
+    ...getResponses().map(r => `"${r.character}",${r.response}`)
   ].join('\n');
 
   const blob = new Blob([csvContent], { type: 'text/csv' });
   const url = window.URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = `smash-pass-historial-${new Date().toISOString()}.csv`;
+  a.download = `kiss-marry-eat-${new Date().toISOString()}.csv`;
   a.click();
   window.URL.revokeObjectURL(url);
 }
@@ -202,30 +371,23 @@ function renderOverview() {
   const container = document.getElementById('overview-grid');
   container.innerHTML = '';
 
-  const seen = new Set();
-  const uniqueResponses = responses.filter(resp => {
-    if (seen.has(resp.character)) return false;
-    seen.add(resp.character);
-    return true;
-  });
+  getResponses().forEach(response => {
+    const category = response.response.toLowerCase();
 
-  uniqueResponses.forEach(resp => {
     const cell = document.createElement('div');
     cell.className = 'overview-cell';
 
-    const img = document.createElement('img');
-    img.src = resp.image;
+    const image = document.createElement('img');
+    image.src = response.image;
 
     const overlay = document.createElement('div');
-    overlay.className = resp.response === 'Smash' ? 'overlay-smash' : 'overlay-pass';
+    overlay.className = 'overlay-' + category;
 
     const label = document.createElement('span');
     label.className = 'overview-label';
-    label.textContent = resp.character;
+    label.textContent = `${response.response}: ${response.character}`;
 
-    cell.appendChild(img);
-    cell.appendChild(overlay);
-    cell.appendChild(label);
+    cell.append(image, overlay, label);
     container.appendChild(cell);
   });
 
@@ -234,108 +396,34 @@ function renderOverview() {
 
 // Función para mostrar mensaje final (Al acabarse la lista de personajes) / Function to show end message (When the character list runs out)
 function showEndMessage() {
-  card.style.display = 'none';
-  buttons.style.display = 'none';
-  imageCounter.style.display = 'none';
+  finished = true;
+  cardsContainer.style.display = 'none';
+  navButtons.style.display = 'none';
+  characterCounter.textContent = '';
+  categoryTray.style.display = 'none';
 
   // You can customize the text for the end messages in the variable "endmessages" at the top
-  resultText.innerHTML = `
+  resultElement.innerHTML = `
     <h2 style="color: #2196F3; margin: 5px 0;">${endMessages[0]}</h2>
     <p style="color:rgb(124, 128, 129); font-size: 12px; margin: 2px 0;">${endMessages[1]}</p>
     <p style="color: white; margin: 20px 0;">${endMessages[2]}</p>
   `;
 
-  document.getElementById('download-btn').style.animation = 'pulse 1.5s infinite';
+  downloadButton.style.display = 'inline-block';
+  downloadButton.style.animation = 'pulse 1.5s infinite';
   renderOverview();
 }
 
-// Función para manejar el inicio del arrastre / Function to handle the start of the drag
-function startDrag(e) {
-  if (!currentCharacter) return;
-  isDragging = true;
-  dragContainer.classList.add('dragging');
-  startPosX = e.clientX ?? e.touches[0].clientX;
-  currentTranslateX = 0;
+function start() {
+  rounds = createRounds();
+  createCards();
+  createCategoryButtons();
+  renderRound();
 }
 
-// Función para manejar el arrastre / Function to handle the drag
-function duringDrag(e) {
-  if (!isDragging || !currentCharacter) return;
-  e.preventDefault();
-  const currentX = e.clientX ?? e.touches[0].clientX;
-  currentTranslateX = currentX - startPosX;
-  dragContainer.style.transform =
-      `translateX(${currentTranslateX}px) rotate(${currentTranslateX * 0.1}deg)`;
-}
+// Add other Event Listeners
+nextButton.addEventListener('click', goNext);
+backButton.addEventListener('click', goBack);
+downloadButton.addEventListener('click', downloadCSV);
 
-// Función para manejar el final del arrastre / Function to handle the end of the drag
-function endDrag() {
-  if (!isDragging || !currentCharacter) return;
-  isDragging = false;
-  dragContainer.classList.remove('dragging');
-
-  if (Math.abs(currentTranslateX) > SWIPE_THRESHOLD) {
-    const voteType = currentTranslateX > 0 ? 'Smash' : 'Pass';
-    handleVote(voteType);
-
-    // Animación de salida / Exit animation
-    dragContainer.style.transform =
-        `translateX(${currentTranslateX * 2}px) rotate(${currentTranslateX * 0.2}deg)`;
-    dragContainer.style.opacity = '0';
-    setTimeout(() => {
-      dragContainer.style.transform = 'none';
-      dragContainer.style.opacity = '1';
-    }, 300);
-  } else {
-    dragContainer.style.transform = 'none';
-  }
-}
-
-// All Event Listeners
-
-// Eventos de botones / Button events
-smashBtn.addEventListener('click', () => handleVote('Smash'));
-passBtn.addEventListener('click', () => handleVote('Pass'));
-
-// Lógica de arrastre / Drag logic
-dragContainer.addEventListener('touchstart', startDrag, { passive: true });
-dragContainer.addEventListener('touchmove', duringDrag, { passive: false });
-
-// Añadir eventos de arrastre / Add drag events
-dragContainer.addEventListener('touchend', endDrag);
-dragContainer.addEventListener('mousedown', startDrag);
-dragContainer.addEventListener('mousemove', duringDrag);
-dragContainer.addEventListener('mouseup', endDrag);
-dragContainer.addEventListener('mouseleave', endDrag);
-
-// Event Listeners for switching between images
-document.addEventListener('keydown', (e) => {
-  if (!currentCharacter) return;
-  if (e.key === 'ArrowLeft') {
-    if (currentImageIndex > 0) showImage(currentImageIndex - 1);
-  } else if (e.key === 'ArrowRight') {
-    if (currentImageIndex < currentCharacter.images.length - 1)
-      showImage(currentImageIndex + 1);
-  } else if (e.key === 's' || e.key === 'S') {
-    handleVote('Smash');
-  } else if (e.key === 'p' || e.key === 'P') {
-    handleVote('Pass');
-  }
-});
-
-prevImgBtn.addEventListener('click', (e) => {
-  e.stopPropagation();
-  if (currentImageIndex > 0) showImage(currentImageIndex - 1);
-});
-
-nextImgBtn.addEventListener('click', (e) => {
-  e.stopPropagation();
-  if (currentCharacter && currentImageIndex < currentCharacter.images.length - 1)
-    showImage(currentImageIndex + 1);
-});
-
-// Evento para descargar el CSV / Event to download the CSV
-document.getElementById('download-btn').addEventListener('click', downloadCSV);
-
-// Inicio de la aplicación / Start of the application
-loadCharacter();
+start();

@@ -1,3 +1,10 @@
+/* variables for the highlight colors */
+:root {
+  --kiss: #2196F3;
+  --marry: #ff4fa3;
+  --eat: #e53935;
+}
+
 /* Estilos base */
 body {
   font-family: Arial, sans-serif;
@@ -12,155 +19,247 @@ body {
 
 .container {
   text-align: center;
-  max-width: 800px;
-  width: 90%;
-  margin: 20px auto;
+  max-width: 1000px;
+  width: 92%;
+  margin: 20px auto 60px;
   background: #181a1b;
   padding: 30px;
   border-radius: 15px;
   box-shadow: 12px 0 30px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
 }
 
 /* Tarjeta e imagen */
-.card {
-  height: 640px;
-  margin: 30px 0;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+/* for the three images of the characters */
+#cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 20px 0;
 }
 
-#character-image {
-  width: 500px;
-  height: 500px;
-  max-width: 100%;
-  max-height: 60vh;
+/* for each character card */
+.character-card {
+  background: #202325;
+  border: 3px solid #202325;
+  border-radius: 12px;
+  padding: 8px 8px 4px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* to handle all images properly */
+.image-wrap {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #181a1b;
+}
+
+/* for the highlight when picked */
+.character-card.pick-kiss {
+  border-color: var(--kiss);
+  box-shadow: 0 0 16px rgba(33, 150, 243, 0.45);
+}
+.character-card.pick-marry {
+  border-color: var(--marry);
+  box-shadow: 0 0 16px rgba(255, 79, 163, 0.45);
+}
+.character-card.pick-eat {
+  border-color: var(--eat);
+  box-shadow: 0 0 16px rgba(229, 57, 53, 0.45);
+}
+
+/* for the image highlight when the category button is dragged over it */
+.character-card.drag-over {
+  border-color: white;
+}
+
+/* for the label that is applied when a category choice is set to indicate which one it is */
+.choice-label {
+  display: none;
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 3;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: white;
+}
+
+/* for handling the image when each category is applied.. this was pain to figure it out xD */
+.pick-kiss .choice-label {
+  background: var(--kiss);
+}
+.pick-marry .choice-label {
+  background: var(--marry);
+}
+.pick-eat .choice-label {
+  background: var(--eat);
+}
+.image-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.pick-kiss .image-wrap::after {
+  background: rgba(33, 150, 243, 0.25);
+  opacity: 1;
+}
+.pick-marry .image-wrap::after {
+  background: rgba(255, 79, 163, 0.25);
+  opacity: 1;
+}
+.pick-eat .image-wrap::after {
+  background: rgba(229, 57, 53, 0.30);
+  opacity: 1;
+}
+
+/* for the tray of the category buttons */
+#category-tray {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin: 20px;
+}
+
+/* for the category buttons itself  */
+.category-button {
+  padding: 12px 25px;
+  font-size: 1.2rem;
+  border-radius: 8px;
+  color: white;
+  background: var(--category-color);
+  cursor: grab;
+  user-select: none;
+}
+
+/* how the image is displayed */
+.character-image {
+  width: 100%;
+  height: 100%;
   object-fit: contain;
-  border-radius: 10px;
-  margin: 20px auto;
   display: block;
-  border: 1px solid #202325;
-  image-rendering: -webkit-optimize-contrast;
+  user-select: none;
   transition: opacity 0.12s ease;
 }
 
-#character-image[src*="https://freesvg.org/storage/img/thumb/errname1.png"] {
-  border: 2px dashed #202325;
-  background-color: #181a1b;
-}
+/* Textos / Text */
 
+.character-name {
+  color: white;
+  font-size: 1.3rem;
+  text-transform: capitalize;
+  margin: 10px 0 6px;
+}
 #character-counter {
   color: white;
   font-size: 14px;
 }
 
-/* Textos */
-h1 {
-  color: white;
-  font-size: 2.5rem;
-  margin-bottom: 20px;
-}
-
-#character-name {
-  height: 60px;
-  color: white;
-  font-size: 1.8rem;
-  text-transform: capitalize;
-}
-
-/* Botones */
-.buttons {
-  margin: 30px 0;
-}
-
+/* for the navigation buttons */
 button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  color: white;
+  transition: transform 0.2s, opacity 0.2s, background 0.2s;
+}
+.buttons button {
   padding: 12px 25px;
   font-size: 1.2rem;
   margin: 0 15px;
-  cursor: pointer;
-  border: none;
   border-radius: 8px;
-  color: white;
-  transition: transform 0.2s;
 }
-
-button:hover {
+button:hover:not(:disabled) {
   transform: scale(1.05);
 }
 
-#smash-btn {
-  background-color: #3d8c40;
+/* for applying each color separately */
+.category-kiss {
+  --category-color: var(--kiss);
+}
+.category-marry {
+  --category-color: var(--marry);
+}
+.category-eat {
+  --category-color: var(--eat);
 }
 
-#pass-btn {
-  background-color: #a91409;
+/* for indicating when the category button was used */
+.category-button.taken {
+  opacity: 0.45;
 }
 
-#download-btn {
-  background-color: #464646;
-  padding: 12px 25px;
-  font-size: 1.1rem;
-  margin-top: 0px;
-  border-radius: 8px;
-  color: white;
-  cursor: pointer;
-}
-
-#back-btn {
-  background-color: #3b3b3b;
+/* for the remove-choice button */
+.clear-button {
   display: none;
-}
-
-/* Resultados */
-#result {
-  font-weight: bold;
-  font-size: 1.5rem;
-  margin-top: 20px;
-  min-height: 30px;
-}
-
-.result-label {
-  font-size: 14px;
-  color: #a8a095;
-  display: none;
-}
-
-.result-label.visible {
-  display: block;
-}
-
-#result-text {
-  font-size: 18px;
-  color: white;
-  font-weight: bold;
-}
-
-/* Drag & Drop */
-#drag-container {
-  position: relative;
-  cursor: grab;
-  user-select: none;
-}
-
-#drag-container.dragging {
-  cursor: grabbing;
-  transition: transform 0.1s;
-}
-
-#image-counter {
-  display: none;
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 3;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border-radius: 50%;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  margin: 6px 0 2px;
+  background: rgba(0, 0, 0, 0.65);
+  font-size: 14px;
 }
 
-#dots-container {
+/* for the clear button that is displayed when a category was applied to the image */
+.clear-button:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+/* for the image navigation arrows per character card... omfg, i hate css xd */
+.image-navigation {
+  position: absolute;
+  top: 50%;
+  z-index: 3;
+  transform: translateY(-50%);
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  margin: 0;
+  border-radius: 50%;
   display: flex;
-  gap: 6px;
   align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  line-height: 1;
+  background: rgba(0, 0, 0, 0.45);
+}
+.image-navigation.prev {
+  left: 6px;
+}
+.image-navigation.next {
+  right: 6px;
+}
+.image-navigation:hover:not(:disabled) {
+  transform: translateY(-50%) scale(1.1);
+  background: rgba(0, 0, 0, 0.7);
+}
+.navigation-disabled {
+  opacity: 0.25;
+  pointer-events: none;
 }
 
+/* for displaying dots to indicate and click through multiple images */
+.dots {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
+  margin: 8px 0 2px;
+}
 .dot {
   width: 7px;
   height: 7px;
@@ -170,66 +269,56 @@ button:hover {
   cursor: pointer;
   transition: all 0.2s;
 }
-
 .dot-active {
   width: 10px;
   height: 10px;
   background: white;
 }
 
-#prev-img-btn,
-#next-img-btn {
-  background: rgba(255, 255, 255, 0.15);
-  border: none;
+#download-btn {
+  background-color: #464646;
+  padding: 12px 25px;
+  font-size: 1.1rem;
+  margin-top: 0;
+  border-radius: 8px;
   color: white;
-  font-size: 22px;
-  line-height: 1;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0;
-  margin: 0;
-  transition: background 0.2s, opacity 0.2s;
 }
 
-#prev-img-btn:hover,
-#next-img-btn:hover {
-  background: rgba(255, 255, 255, 0.3);
-  transform: none;
+/* for the navigation buttons */
+#back-btn {
+  background-color: #3b3b3b;
+}
+#next-btn {
+  background-color: #3d8c40;
+}
+.buttons button:disabled {
+  opacity: 0.35;
+  cursor: auto;
 }
 
-.nav-disabled {
-  opacity: 0.3;
-  pointer-events: none;
+/* Resultados */
+#result {
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-top: 20px;
+  min-height: 30px;
 }
-
-/* Loader */
-.loader {
-  width: 40px;
-  height: 40px;
-  border: 4px solid #f3f3f3;
-  border-top: 4px solid #2196F3;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
-  margin: 20px auto;
+.result-label {
+  font-size: 14px;
+  color: #a8a095;
   display: none;
+}
+.result-label.visible {
+  display: block;
+}
+#result-text {
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
 }
 
 /* Animaciones */
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
 @keyframes pulse {
   0% {
     transform: scale(1);
@@ -245,9 +334,6 @@ button:hover {
 }
 
 /* Utilidades */
-.hidden {
-  display: none;
-}
 
 .footer {
   position: fixed;
@@ -275,35 +361,34 @@ a {
   gap: 8px;
   margin-top: 24px;
   width: 100%;
-  max-width: 800px;
 }
-
 .overview-cell {
   position: relative;
   aspect-ratio: 1 / 1;
   overflow: hidden;
   border-radius: 8px;
 }
-
 .overview-cell img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   display: block;
 }
-
-.overlay-smash {
+.overlay-kiss,
+.overlay-marry,
+.overlay-eat {
   position: absolute;
   inset: 0;
-  background: rgba(0, 200, 0, 0.4);
 }
-
-.overlay-pass {
-  position: absolute;
-  inset: 0;
-  background: rgba(220, 30, 60, 0.4);
+.overlay-kiss {
+  background: rgba(33, 150, 243, 0.4);
 }
-
+.overlay-marry {
+  background: rgba(255, 79, 163, 0.4);
+}
+.overlay-eat {
+  background: rgba(229, 57, 53, 0.4);
+}
 .overview-label {
   position: absolute;
   bottom: 0;
