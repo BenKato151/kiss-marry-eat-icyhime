@@ -9,31 +9,19 @@
 <body>
     <div class="container">
         <p id="character-counter"></p>
-        <div id="loader" class="loader"></div>
-        <div class="card">
 
-            <!-- Placeholder for the character image -->
-            <div id="drag-container">
-                <img 
-                  id="character-image" 
-                  src="" 
-                  alt="figure"
-                  draggable="false"
-                  onerror="this.src='https://freesvg.org/storage/img/thumb/errname1.png'; this.onerror=null;">
-                <h2 id="character-name">Lade...</h2>
-            </div>
-            <!-- Placeholder for the character image -->
+        <!-- holder for the cards -->
+        <div id="cards"></div>
 
+        <!-- holder for the category buttons -->
+        <div id="category-tray"></div>
+
+        <!-- Navigation -->
+        <div class="buttons" id="nav-buttons">
+            <!-- You can translate the back and next button text here -->
+            <button id="back-btn" disabled>Zurück</button>
+            <button id="next-btn" disabled>Weiter</button>
         </div>
-
-        <!-- Buttons for Kiss Marry Eat -->
-        <div class="buttons">
-            <!-- TODO: Replace buttons for Kiss, Marry, Eat, back -->
-            <button id="back-btn" onclick="goBack()">Zurück</button>
-            <button id="pass-btn">Pass 👎</button>
-            <button id="smash-btn">Smash 👍</button>
-        </div>
-        <!-- Buttons for Kiss Marry Eat -->
 
         <!-- History and result display -->
         <p id="result">
