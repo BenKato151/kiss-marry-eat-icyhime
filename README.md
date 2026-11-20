@@ -16,10 +16,12 @@ Look for the texts showed in the images below when editing the files and change 
 Then you can host your page with github pages or other hosting methods (Or run it locally on your machine)
 
 ### HTML Text: (Lines 2, 6, 22, 23, 28 in the "index.html" file)
-![image](https://github.com/user-attachments/assets/4c7b7865-37cd-4a99-8e63-397c5ab24418")
+<img width="1046" height="776" alt="Bildschirmfoto_2026-11-20_21-52-37" src="https://github.com/user-attachments/assets/10bd44bf-54e3-4d82-a523-f5ae419e8dfd" />
+
+)
 
 ### JavaScript Text: (Lines 2-13 in the "script.js" file)
-![image](https://github.com/user-attachments/assets/2689c8d9-6f8d-460c-8f0e-613cf83ce37b")
+<img width="901" height="617" alt="Bildschirmfoto_2026-11-20_21-56-17" src="https://github.com/user-attachments/assets/e2aa9f7f-aafd-42f1-aaa5-2877fc40e939" />
 
 ## Editing Characters
 In the JavaScript file named "characters.js" you can find the characters list, you can modify it to your likings.
