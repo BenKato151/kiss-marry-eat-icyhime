@@ -8,6 +8,10 @@ const characters = [
     { name: "Ciella the cutie potati   Dokomi 2027", images: ["kiss_marry_eat/CiellaVT/Ciella the cutie potati _ Dokomi 2027-1.jpg"] },
     { name: "DaisyMelfea ✨ Elf Vtuber 🍃", images: ["kiss_marry_eat/DaisyMelfea/DaisyMelfea ✨ Elf Vtuber 🍃-1.jpg"] },
     { name: "DerJer", images: ["kiss_marry_eat/DerJer666/DerJer-1.jpg"] },
+    { name: "Diablo (Icys Husbando)", images: [
+            "kiss_marry_eat/Diablo (Icys Husbando)/Diablo (Icys Husbando)-1.png",
+            "kiss_marry_eat/Diablo (Icys Husbando)/Diablo (Icys Husbando)-2.png"
+        ]},
     { name: "Einerwie", images: ["kiss_marry_eat/Einerwie_LP/Einerwie-1.jpg"] },
     { name: "Frau Ente", images: [
             "kiss_marry_eat/Frau_Ente_VT/Frau_Ente-1.jpg",
@@ -25,6 +29,12 @@ const characters = [
         ]},
     { name: "Hoshizuki 🦊⛩️   🏳️‍⚧️ (Un-)Heilige Allianz", images: ["kiss_marry_eat/HoshizukiVT/Hoshizuki 🦊⛩️ _ 🏳️‍⚧️ (Un-)Heilige Allianz-1.jpg"] },
     { name: "IceRuneKnight", images: ["kiss_marry_eat/IceRuneKnight/IceRuneKnight-1.jpg"] },
+    { name: "Beste Sängerin EVER (Icyhime)", images: [
+            "kiss_marry_eat/Icyhime/Beste Sängerin EVER (Icyhime)-1.png",
+            "kiss_marry_eat/Icyhime/Beste Sängerin EVER (Icyhime)-2.png",
+            "kiss_marry_eat/Icyhime/Beste Sängerin EVER (Icyhime)-3.png",
+            "kiss_marry_eat/Icyhime/Beste Sängerin EVER (Icyhime)-4.png"
+        ]},
     { name: "Ignitris - Feuerbär-Vtuber   PRIIIIIIIIDE", images: [
             "kiss_marry_eat/IgnitrisVt/Ignitris - Feuerbär-Vtuber _ PRIIIIIIIIDE-1.jpg",
             "kiss_marry_eat/IgnitrisVt/Ignitris - Feuerbär-Vtuber _ PRIIIIIIIIDE-2.jpg"
@@ -136,6 +146,7 @@ const characters = [
             "kiss_marry_eat/moniika_vt/MONIIKA __ 💸🐖 VTUBER-1.jpg",
             "kiss_marry_eat/moniika_vt/MONIIKA __ 💸🐖 VTUBER-2.jpg"
         ]},
+    { name: "nervigster moderator EVER", images: ["kiss_marry_eat/nervigster_moderator_EVER/nervigster_moderator_EVER-1.png"] },
     { name: "Sir Reap", images: [
             "kiss_marry_eat/reap_sir/Sir Reap-1.jpg",
             "kiss_marry_eat/reap_sir/Sir Reap-2.jpg"
