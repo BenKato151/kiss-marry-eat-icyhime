@@ -25,7 +25,6 @@ const characters = [
         ]},
     { name: "Hoshizuki 🦊⛩️   🏳️‍⚧️ (Un-)Heilige Allianz", images: ["kiss_marry_eat/HoshizukiVT/Hoshizuki 🦊⛩️ _ 🏳️‍⚧️ (Un-)Heilige Allianz-1.jpg"] },
     { name: "IceRuneKnight", images: ["kiss_marry_eat/IceRuneKnight/IceRuneKnight-1.jpg"] },
-    { name: "IcyHime   GER Spider Vtuber  🕸️❄️", images: ["kiss_marry_eat/Icylia_Webster/IcyHime _ GER Spider Vtuber _🕸️❄️-1.jpg"] },
     { name: "Ignitris - Feuerbär-Vtuber   PRIIIIIIIIDE", images: [
             "kiss_marry_eat/IgnitrisVt/Ignitris - Feuerbär-Vtuber _ PRIIIIIIIIDE-1.jpg",
             "kiss_marry_eat/IgnitrisVt/Ignitris - Feuerbär-Vtuber _ PRIIIIIIIIDE-2.jpg"
