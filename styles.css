@@ -18,6 +18,7 @@ body {
 }
 
 .container {
+  position: relative;
   text-align: center;
   max-width: 1000px;
   width: 92%;
@@ -141,12 +142,36 @@ body {
 
 /* how the image is displayed */
 .character-image {
+  cursor: zoom-in;
   width: 100%;
   height: 100%;
   object-fit: contain;
   display: block;
   user-select: none;
   transition: opacity 0.12s ease;
+}
+/* how the image behaves when zoomed in */
+.character-card.zoomed {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  border-radius: 15px;
+}
+.character-card.zoomed .image-wrap {
+  flex: 1;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+.character-card.zoomed .character-image {
+  cursor: zoom-out;
+}
+.character-card.zoomed .image-navigation {
+  width: 44px;
+  height: 44px;
+  font-size: 26px;
 }
 
 /* Textos / Text */

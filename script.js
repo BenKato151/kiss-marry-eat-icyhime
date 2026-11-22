@@ -78,6 +78,9 @@ function createCard(cardindex) {
     <h2 class="character-name"></h2>
   `;
 
+  const image = card.querySelector('.character-image');
+  image.addEventListener('click', () => toggleZoomedCard(card));
+
   card.addEventListener('dragover', event => {
     event.preventDefault();
     event.dataTransfer.dropEffect = 'move';
@@ -186,6 +189,48 @@ function showImage(cardindex, index) {
     prevButton.style.display = 'none';
     nextImageButton.style.display = 'none';
   }
+}
+
+// Close zoomed in card if it is zoomed in
+function closeZoomedCard() {
+  const zoomedCard = cardsContainer.querySelector('.zoomed');
+  if (zoomedCard) {
+    zoomedCard.classList.remove('zoomed');
+    cardsContainer.style.height = '';
+  }
+}
+
+// Toggle the zoomed in state
+function toggleZoomedCard(card) {
+  if (card.classList.contains('zoomed')) {
+    closeZoomedCard();
+  }
+  else {
+    cardsContainer.style.height = cardsContainer.offsetHeight + 'px';
+    card.classList.add('zoomed');
+  }
+}
+
+// Zooms out of the image when pressing ESC
+function closeZoomedCardOnESC(event) {
+  if (event.key === 'Escape') {
+    closeZoomedCard();
+  }
+}
+
+// Zooms out of the image when clicking outside of it when it is zoomed in
+function closeZoomedCardOutside(event) {
+  const zoomedCard = cardsContainer.querySelector('.zoomed');
+  if (!zoomedCard) {
+    return;
+  }
+
+  const clicked = event.target.closest('.character-image, .image-navigation, .clear-button, .dot');
+  if (clicked) {
+    return;
+  }
+
+  closeZoomedCard();
 }
 
 // Logic to set the choice of the selected category
@@ -425,5 +470,7 @@ function start() {
 nextButton.addEventListener('click', goNext);
 backButton.addEventListener('click', goBack);
 downloadButton.addEventListener('click', downloadCSV);
+document.addEventListener('keydown', closeZoomedCardOnESC);
+document.addEventListener('click', closeZoomedCardOutside);
 
 start();
