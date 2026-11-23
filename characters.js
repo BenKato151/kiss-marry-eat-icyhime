@@ -19,9 +19,9 @@ const characters = [
         ]},
     { name: "Gomnir vt   collabs closed", images: ["kiss_marry_eat/Gomnir_vt/Gomnir_vt _ collabs closed-1.jpg"] },
     { name: "Hana kitsumi GERVtuberin", images: ["kiss_marry_eat/Hana15051/Hana_kitsumi_GERVtuberin-1.jpg"] },
-    { name: "Hanae ⏻ 🌐22.11 winter outfit", images: [
-            "kiss_marry_eat/HanaeVT/Hanae ⏻ 🌐22.11 winter outfit-1.jpg",
-            "kiss_marry_eat/HanaeVT/Hanae ⏻ 🌐22.11 winter outfit-2.jpg"
+    { name: "Hanae ⏻ 🌐", images: [
+            "kiss_marry_eat/HanaeVT/Hanae ⏻ 🌐-1.jpg",
+            "kiss_marry_eat/HanaeVT/Hanae ⏻ 🌐-2.jpg"
         ]},
     { name: "Himechii   Subathon 29.11. 🦋", images: [
             "kiss_marry_eat/HimechiiVT/Himechii _ Subathon 29.11. 🦋-1.jpg",
@@ -60,9 +60,9 @@ const characters = [
             "kiss_marry_eat/Klinday_/Klinday ~ 🐺🪓-Vtuber-3.png"
         ]},
     { name: "Lou Luxaris 🌿✨ AION2 Content Creator", images: ["kiss_marry_eat/LouLuxaris/Lou Luxaris 🌿✨ AION2 Content Creator-1.jpg"] },
-    { name: "Marry 🌹 GERVtuberin I Redebut 04.11.", images: [
-            "kiss_marry_eat/MarryofBlood/Marry 🌹 GERVtuberin I Redebut 04.11.-1.jpg",
-            "kiss_marry_eat/MarryofBlood/Marry 🌹 GERVtuberin I Redebut 04.11.-2.jpg"
+    { name: "Marry 🌹 GERVtuberin", images: [
+            "kiss_marry_eat/MarryofBlood/Marry 🌹 GERVtuberin-1.jpg",
+            "kiss_marry_eat/MarryofBlood/Marry 🌹 GERVtuberin-2.jpg"
         ]},
     { name: "Mooswolf 🌿🐺 GerVTuber", images: [
             "kiss_marry_eat/Mooswolf/Mooswolf 🌿🐺 GerVTuber-1.jpg",
@@ -89,9 +89,10 @@ const characters = [
             "kiss_marry_eat/NoctusVT/Noctus_Novaglace_ SoulSync _ Comiccon Stuttgart 26-2.jpg"
         ]},
     { name: "Obergeneral Stinky   VTuber & Cutter", images: ["kiss_marry_eat/OberGen_Stinky/Obergeneral Stinky _ VTuber & Cutter-1.jpg"] },
-    { name: "Raito 🔥🪽 Polaris 2026 🫰🏻", images: [
-            "kiss_marry_eat/RaitoNoAniki/Raito 🔥🪽 Polaris 2026 🫰🏻-1.jpg",
-            "kiss_marry_eat/RaitoNoAniki/Raito 🔥🪽 Polaris 2026 🫰🏻-2.jpg"
+    { name: "Pingi 🎭   Le Fඞmily 🖤✨️", images: ["kiss_marry_eat/Pingikyu/Pingi 🎭 _ Le Fඞmily 🖤✨️-1.jpg"] },
+    { name: "Raito 🔥🪽", images: [
+            "kiss_marry_eat/RaitoNoAniki/Raito 🔥🪽-1.jpg",
+            "kiss_marry_eat/RaitoNoAniki/Raito 🔥🪽-2.jpg"
         ]},
     { name: "Rena 🍀🐛  ARTIST   Everybody's Darling", images: [
             "kiss_marry_eat/RenaCloverfield/Rena 🍀🐛_ ARTIST _ Everybody's Darling-1.jpg",
@@ -103,9 +104,9 @@ const characters = [
             "kiss_marry_eat/Sifhlord/sifi_the_cuddle_bunny-1.jpg",
             "kiss_marry_eat/Sifhlord/sifi_the_cuddle_bunny-2.jpg"
         ]},
-    { name: "Raya 🐲📖  wurmdrago", images: [
-            "kiss_marry_eat/SorayaLinx/Raya 🐲📖_ wurmdrago _-1.jpg",
-            "kiss_marry_eat/SorayaLinx/Raya 🐲📖_ wurmdrago _-2.jpg"
+    { name: "Raya 🐲📖  Buchdrachen Vtuber", images: [
+            "kiss_marry_eat/SorayaLinx/Raya 🐲📖_ Buchdrachen Vtuber _-1.jpg",
+            "kiss_marry_eat/SorayaLinx/Raya 🐲📖_ Buchdrachen Vtuber _-2.jpg"
         ]},
     { name: "SpiritoftheWolfs👻🐺 GerVTuber ✨03.04 AniMuc", images: ["kiss_marry_eat/SpiritoftheWo1f/SpiritoftheWolfs👻🐺 GerVTuber ✨03.04 AniMuc-1.jpg"] },
     { name: "TimoTamun   GERVtuber ⚡🦅", images: [
@@ -142,6 +143,7 @@ const characters = [
     { name: "MayKokoro 🍓", images: ["kiss_marry_eat/may_kokoro/MayKokoro 🍓-1.jpg"] },
     { name: "Minty ⛩️🌌   Abyssal Kitsune VTuber 💜", images: ["kiss_marry_eat/mintygalactic/Minty ⛩️🌌 _ Abyssal Kitsune VTuber 💜-1.jpg"] },
     { name: "Misamii🐺🔥💜", images: ["kiss_marry_eat/misamiix3/Misamii🐺🔥💜-1.jpg"] },
+    { name: "Misheru GER EN", images: ["kiss_marry_eat/misherukuro/Misheru GER_EN-1.jpg"] },
     { name: "MONIIKA    💸🐖 VTUBER", images: [
             "kiss_marry_eat/moniika_vt/MONIIKA __ 💸🐖 VTUBER-1.jpg",
             "kiss_marry_eat/moniika_vt/MONIIKA __ 💸🐖 VTUBER-2.jpg"
