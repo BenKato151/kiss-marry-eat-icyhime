@@ -123,6 +123,10 @@ const characters = [
     "kiss_marry_eat/SorayaLinx/Raya 🐲📖_ Buchdrachen Vtuber _-2.jpg"
   ]},
   { name: "SpiritoftheWolfs👻🐺 GerVTuber ✨03.04 AniMuc", images: ["kiss_marry_eat/SpiritoftheWo1f/SpiritoftheWolfs👻🐺 GerVTuber ✨03.04 AniMuc-1.jpg"] },
+  { name: "Syraxis 🐛✨  Monster Boy Vtuber (Hiatus)", images: [
+    "kiss_marry_eat/Syraxis/Syraxis 🐛✨_ Monster Boy Vtuber (Hiatus)-1.jpg",
+    "kiss_marry_eat/Syraxis/Syraxis 🐛✨_ Monster Boy Vtuber (Hiatus)-2.jpg"
+  ]},
   { name: "TimoTamun   GERVtuber ⚡🦅", images: [
     "kiss_marry_eat/TimotamunVT/TimoTamun _ GERVtuber ⚡🦅-1.jpg",
     "kiss_marry_eat/TimotamunVT/TimoTamun _ GERVtuber ⚡🦅-2.jpg"
@@ -163,6 +167,10 @@ const characters = [
     "kiss_marry_eat/moniika_vt/MONIIKA __ 💸🐖 VTUBER-2.jpg"
   ]},
   { name: "nervigster moderator EVER", images: ["kiss_marry_eat/nervigster_moderator_EVER/nervigster_moderator_EVER-1.png"] },
+  { name: "noxsoeiner", images: [
+    "kiss_marry_eat/noxsoeiner/noxsoeiner-1.jpg",
+    "kiss_marry_eat/noxsoeiner/noxsoeiner-2.jpg"
+  ]},
   { name: "Sir Reap", images: [
     "kiss_marry_eat/reap_sir/Sir Reap-1.jpg",
     "kiss_marry_eat/reap_sir/Sir Reap-2.jpg"
