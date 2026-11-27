@@ -65,6 +65,10 @@ const characters = [
     "kiss_marry_eat/LiniChanMi/LiniChanMi _ Lion VTuber 🦁🐸-2.jpg"
   ]},
   { name: "Lou Luxaris 🌿✨ AION2 Content Creator", images: ["kiss_marry_eat/LouLuxaris/Lou Luxaris 🌿✨ AION2 Content Creator-1.jpg"] },
+  { name: "Luis the Croc 🐊 Crocodile Vtuber", images: [
+    "kiss_marry_eat/Luis_the_croc/Luis the Croc 🐊 Crocodile Vtuber-1.jpg",
+    "kiss_marry_eat/Luis_the_croc/Luis the Croc 🐊 Crocodile Vtuber-2.jpg"
+  ]},
   { name: "Luricerus   höllenhund 🇩🇪🇮🇹", images: [
     "kiss_marry_eat/Luricerus/Luricerus__ höllenhund 🇩🇪🇮🇹-1.jpg",
     "kiss_marry_eat/Luricerus/Luricerus__ höllenhund 🇩🇪🇮🇹-2.jpg"
@@ -112,6 +116,7 @@ const characters = [
     "kiss_marry_eat/RenaCloverfield/Rena 🍀🐛_ ARTIST _ Everybody's Darling-1.jpg",
     "kiss_marry_eat/RenaCloverfield/Rena 🍀🐛_ ARTIST _ Everybody's Darling-2.jpg"
   ]},
+  { name: "Hamorii Shinra", images: ["kiss_marry_eat/SGHamorii/Hamorii Shinra-1.jpg"] },
   { name: "ShadowLorn 🐲🎲📽GerPNGTuber", images: ["kiss_marry_eat/ShadowLorn1/ShadowLorn 🐲🎲📽GerPNGTuber-1.jpg"] },
   { name: "Shoyo 🔥🖤", images: ["kiss_marry_eat/Shoyocchii/Shoyo 🔥🖤-1.jpg"] },
   { name: "sifi the cuddle bunny", images: [
